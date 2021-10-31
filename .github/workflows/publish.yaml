@@ -32,10 +32,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Invoke update deployment workflow
-        uses: aurelien-baudet/workflow-dispatch@v2
+        uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: update-deployment
           repo: hybridfox/test-infra
           token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
           inputs: '{"filePath": "app/deployment.yaml","debug": true,"propertyPath": "spec.template.spec.containers.0.image","propertyValue": "ghcr.io/hybridfox/test-app:1.0.5"}'
-          wait-for-completion: true
