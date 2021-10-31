@@ -37,5 +37,11 @@ jobs:
           workflow: update-deployment
           repo: hybridfox/test-infra
           token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
-          inputs: '{ "message": "blah blah", "debug": true }'
+          inputs: |
+            '{
+              "filePath": "app/deployment.yaml",
+              "debug": true,
+              "propertyPath": "spec.template.spec.containers.0.image",
+              "propertValue": "ghcr.io/hybridfox/test-app:${{ steps.meta.outputs.tags }}"
+            }'
           wait-for-completion: true
