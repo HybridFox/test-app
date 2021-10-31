@@ -5,7 +5,7 @@ on:
       - v*
 
 jobs:
-  push_app_to_registry:
+  push-to-registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +31,10 @@ jobs:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Invoke update deployment workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: update-deployment
+          repo: hybridfox/test-infra
+          token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
+          inputs: '{ "message": "blah blah", "debug": true }'
