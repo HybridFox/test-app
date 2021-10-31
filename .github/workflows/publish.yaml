@@ -37,4 +37,4 @@ jobs:
           workflow: update-deployment
           repo: hybridfox/test-infra
           token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
-          inputs: '{"filePath": "app/deployment.yaml","propertyPath": "spec.template.spec.containers.0.image","propertyValue": "ghcr.io/hybridfox/test-app:${{ steps.meta.outputs.tags }}"}'
+          inputs: '{"filePath":"app/deployment.yaml","propertyPath":"spec.template.spec.containers.0.image","propertyValue":"ghcr.io/hybridfox/test-app:${{ github.event.release.tag_name }}"}'
